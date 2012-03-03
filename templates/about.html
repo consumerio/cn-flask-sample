@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="span8">
+            <h2>About this demo</h2>
+            <p>
+                This is a demo showing how to use the Consumer Notebook API in a sample Flask app.
+            </p>
+
+            <p>
+                The code for this is at https://github.com/consumernotebook/cn-flask-sample.
+            </p>
+
+        </div>
+        <div class="span8">
+            <h2>Credits</h2>
+            <p>
+                This code is based on @zachwill's <a href="https://github.com/zachwill/flask_heroku">flask_heroku</a> template app, a project designed to get you up and running quickly on Heroku with Flask.  Thanks, Zach!
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

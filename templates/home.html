@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="span8">
+            <h2>Consumer Notebook - Flask Sample App</h2>
+            
+            <p>
+                Enter your username and API key to see the products you've bookmarked on Consumer Notebook.
+            </p>
+            {% from "_form_helpers.html" import render_field %}
+            <form class="well form-inline" method="POST" action="">
+                {{ render_field(form.username) }}
+                {{ render_field(form.api_key) }}
+                <p>
+                    <button type="submit" class="btn">Go</button>
+                </p>
+            </form>
+        </div>
+        <div class="span8">
+            <h3>Questions?</h3>
+            <p>
+                See <a href="http://developers.consumernotebook.com">developers.consumernotebook.com</a> for how to get help.
+            </p>
+    </div>
+</div>
+{% endblock %}
