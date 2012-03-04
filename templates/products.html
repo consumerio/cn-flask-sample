@@ -9,13 +9,21 @@
 <div class="container">
     <div class="row">
         <div class="span16">
-            <h2>Products bookmarked by {{ session['username'] }}</h2>
-            <p>Here are the 20 most recent products that {{ session['username'] }} has bookmarked on Consumer Notebook:</p>
-            <ul>
-                {% for product in products %}
-                    <li>{{ product }}</li>
-                {% endfor %}
-            </ul>
+            {% if error %}
+                <p class=error><strong>Error:</strong> {{ error }}</p>
+            {% else %}
+                <h2>Products bookmarked by {{ session['username'] }}</h2>
+                {% if products %}
+                    <p>Here are the 20 most recent products that {{ session['username'] }} has bookmarked on Consumer Notebook:</p>
+                    <ul>
+                        {% for product in products %}
+                            <li>{{ product }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>There are no products to display.</p>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
 </div>

@@ -31,11 +31,15 @@ def products():
     api_key = session['api_key']
     url = 'https://consumernotebook.com/api/v1/products/?username={0}&apikey={1}'.format(username, api_key)
     r = requests.get(url)
-    products_json = json.loads(r.content)
     products = []
-    for product in products_json[u'objects']:
-        products.append(product[u'title'])
-    return render_template('products.html', products=products)
+    if r.status_code != 200:
+        error = "{0} error. Are you sure you entered a valid API key?".format(r.status_code)
+        return render_template('products.html', error=error)
+    else:
+        products_json = json.loads(r.content)
+        for product in products_json[u'objects']:
+            products.append(product[u'title'])
+        return render_template('products.html', products=products)
 
 @views.route('/about/')
 def about():
