@@ -4,8 +4,6 @@ Flask Sample Project
 
 This is a sample Flask project that uses the Consumer Notebook API.
 
-WARNING: IT DOESN'T ACTUALLY USE THE CONSUMER NOTEBOOK API AS IT SHOULD YET.  We're still working on preparing this sample for you...
-
 Running it locally
 ------------------
 

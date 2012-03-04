@@ -27,8 +27,9 @@ def home():
 @views.route('/products/')
 def products():
     """Display the specified user's products."""
+    username = session['username']
     api_key = session['api_key']
-    url = 'https://consumernotebook.com/api/v1/products/?apikey={0}'.format(api_key)
+    url = 'https://consumernotebook.com/api/v1/products/?username={0}&apikey={1}'.format(username, api_key)
     r = requests.get(url)
     products_json = json.loads(r.content)
     products = []
