@@ -4,14 +4,14 @@ Flask Sample Project
 
 This is a sample Flask project that uses the Consumer Notebook API.
 
-WARNING: IT DOESN'T ACTUALLY USE THE CONSUMER NOTEBOOK API YET.  We're still working on preparing this sample for you...
+WARNING: IT DOESN'T ACTUALLY USE THE CONSUMER NOTEBOOK API AS IT SHOULD YET.  We're still working on preparing this sample for you...
 
 Running it locally
 ------------------
 
 In your terminal::
 
-    $ git clone 
+    $ git clone https://github.com/consumernotebook/cn-flask-sample.git
     $ cd cn-flask-sample
     $ mkvirtualenv cn-flask-sample
     $ pip install -r requirements.txt

@@ -4,9 +4,10 @@ Flask Blueprint Docs:  http://flask.pocoo.org/docs/api/#flask.Blueprint
 This file is used for both the routing and logic of your
 application.
 """
-
-from flask import Blueprint, render_template, request, redirect, url_for
+import json
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from forms import SignInForm
+import requests
 
 views = Blueprint('views', __name__, static_folder='../static',
                   template_folder='../templates')
@@ -17,14 +18,23 @@ def home():
     """Render website's home page."""
     form = SignInForm(request.form)
     if request.method == 'POST':
-        # TODO: pass this to the Consumer Notebook API
+        # Pass this to the Consumer Notebook API
+        session['username'] = request.form['username']
+        session['api_key'] = request.form['api_key']
         return redirect('/products/')
     return render_template('home.html', form=form)
 
 @views.route('/products/')
 def products():
-    """Display the authenticated user's products."""
-    return render_template('products.html')
+    """Display the specified user's products."""
+    api_key = session['api_key']
+    url = 'https://consumernotebook.com/api/v1/products/?apikey={0}'.format(api_key)
+    r = requests.get(url)
+    products_json = json.loads(r.content)
+    products = []
+    for product in products_json[u'objects']:
+        products.append(product[u'title'])
+    return render_template('products.html', products=products)
 
 @views.route('/about/')
 def about():
