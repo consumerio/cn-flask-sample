@@ -2,6 +2,8 @@
 Flask Sample Project
 =====================
 
+By @audreyr.
+
 This is a sample Flask project that uses the Consumer Notebook API.
 
 Running it locally
@@ -27,4 +29,9 @@ Note: you can also run it with Foreman, but you won't get the debugger::
 Deploying it on Heroku
 ----------------------
 
-Delete the runserver.py file, then follow the deployment instructions at https://github.com/zachwill/flask_heroku.  This demo is mostly based on the code from the [Flask Heroku](https://github.com/zachwill/flask_heroku) project, which is a template to get your Flask app running on Heroku as fast as possible.
+Follow the deployment instructions at https://github.com/zachwill/flask_heroku.  
+
+Credits
+-------
+
+This demo is mostly based on the code from the [Flask Heroku](https://github.com/zachwill/flask_heroku) project, which is a template to get your Flask app running on Heroku as fast as possible.
