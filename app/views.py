@@ -4,9 +4,13 @@ Flask Blueprint Docs:  http://flask.pocoo.org/docs/api/#flask.Blueprint
 This file is used for both the routing and logic of your
 application.
 """
+from copy import deepcopy
 import json
+
 from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import make_response
 from forms import SignInForm
+
 import requests
 
 views = Blueprint('views', __name__, static_folder='../static',
@@ -71,3 +75,36 @@ def add_header(response):
 def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
+
+settings =     {
+      'host':     "http://127.0.0.1:8000",
+      'clientId': "2cbeeb023b62832a3bc2",
+      'redirectURI': "http://127.0.0.1:5000/oauth/",
+      'client_secret': 'a57da52eb21e22129d303932bdb5754c53b678c8',
+      'grant_type': "authorization_code",
+    }
+
+
+@views.route('/oauth/', methods=['POST', 'GET'])
+def oauth():
+    """Render the website's oauth page."""
+    code = request.args.get('code')
+    if code:
+        params = deepcopy(settings)
+        url = "{host}/oauth2/access_token/".format(host=params.pop('host'))        
+        params['code'] = code
+        params['client_id'] = params.pop('clientId')
+        params['redirect_uri'] = params.pop('redirectURI')
+        r = requests.post(url, data=params)
+        if r.status_code == 500:
+            f = open('error.html','w')
+            f.write(r.content)
+            f.close()
+        if r.status_code == 200:
+            data = json.loads(r.content)
+            resp = make_response(render_template('oauth.html', settings=settings, access_token=data.get('access_token')))
+            for k,v in data.items():
+                resp.set_cookie(k, v)
+            return resp
+    access_token = request.cookies.get("access_token")
+    return render_template('oauth.html',settings=settings, access_token=access_token)
