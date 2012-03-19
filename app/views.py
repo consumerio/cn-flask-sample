@@ -71,3 +71,9 @@ def add_header(response):
 def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
+
+
+@views.route('/oauth/')
+def about():
+    """Render the website's about page."""
+    return render_template('oauth.html')
