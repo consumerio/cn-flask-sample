@@ -21,8 +21,8 @@ Flask-SQLAlchemy==0.15
 # ----------------------
 # Production Server
 # ----------------------
-gevent==0.13.6
-gunicorn==0.14.1
+#gevent==0.13.6
+#gunicorn==0.14.1
 
 
 # -------------------------
