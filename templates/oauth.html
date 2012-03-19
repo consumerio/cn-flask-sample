@@ -5,9 +5,16 @@
     <div class="row">
         <div class="span9">
 
+            {% if access_token %}
             <div class="authenticate hidden">
-              <a class="connect" href="">Connect</a>
+              <a class="connect" href="">Reconnect</a>
             </div>
+            {% else %}
+                <div class="authenticate hidden">
+                  <a class="connect" href="">Connect</a>
+                </div>            
+            {% endif %}
+                
             {% if access_token %}
             
                 <div class="authenticated">
