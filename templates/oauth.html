@@ -38,9 +38,9 @@
 
     var setting =
       {
-        'host':     "127.0.0.1:8000"
-      , 'clientId': "2cbeeb023b62832a3bc2"
-      , 'redirectURI': "http://127.0.0.1:5000/oauth/"
+        'host':     "127.0.0.1:8000",
+        'clientId': "{{ settings.clientId }}",
+        'redirectURI': "{{ settings.redirectURI }}"
       };
 
     var authHost     = "http://"     + setting.host;
