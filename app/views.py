@@ -8,6 +8,7 @@ from copy import deepcopy
 import json
 
 from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import make_response
 from forms import SignInForm
 
 import requests
@@ -99,6 +100,11 @@ def oauth():
             f = open('error.html','w')
             f.write(r.content)
             f.close()
-        print r
-        print r.content        
-    return render_template('oauth.html',settings=settings)
+        if r.status_code == 200:
+            data = json.loads(r.content)
+            resp = make_response(render_template('oauth.html', settings=settings, access_token=data.get('access_token')))
+            for k,v in data.items():
+                resp.set_cookie(k, v)
+            return resp
+    access_token = request.cookies.get("access_token")
+    return render_template('oauth.html',settings=settings, access_token=access_token)

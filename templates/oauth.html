@@ -8,20 +8,24 @@
             <div class="authenticate hidden">
               <a class="connect" href="">Connect</a>
             </div>
+            {% if access_token %}
+            
+                <div class="authenticated">
+                  <p>
+                    You are using token
+                    <strong>{{ access_token }}</strong>.
+                  </p>
 
-            <div class="authenticated hidden">
-              <p>
-                You are using token
-                <span class="token">[no token]</span>.
-              </p>
-
-              <p>
-                Your Consumer Notebook username is
-                <span class="user">[no username]</span>.
-              </p>
-
-
-        </div>
+                  <p>
+                    Your Consumer Notebook username is
+                    <span class="user">[no username]</span>.
+                  </p>
+              </div>
+            
+            
+            {% endif %}
+            
+        
     </div>
 </div>
 {% endblock %}
