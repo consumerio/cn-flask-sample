@@ -80,7 +80,7 @@ settings =     {
       'clientId': "2cbeeb023b62832a3bc2",
       'redirectURI': "http://127.0.0.1:5000/oauth/",
       'client_secret': 'a57da52eb21e22129d303932bdb5754c53b678c8',
-      'grant_type': "0",
+      'grant_type': "authorization_code",
     }
 
 
@@ -90,8 +90,15 @@ def oauth():
     code = request.args.get('code')
     if code:
         params = deepcopy(settings)
-        url = "{host}/oauth2/access_token".format(host=params.pop('host'))        
+        url = "{host}/oauth2/access_token/".format(host=params.pop('host'))        
         params['code'] = code
-        r = requests.get(url, params=params)
+        params['client_id'] = params.pop('clientId')
+        params['redirect_uri'] = params.pop('redirectURI')
+        r = requests.post(url, data=params)
+        if r.status_code == 500:
+            f = open('error.html','w')
+            f.write(r.content)
+            f.close()
         print r
+        print r.content        
     return render_template('oauth.html',settings=settings)
