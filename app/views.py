@@ -76,13 +76,7 @@ def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
 
-settings =     {
-      'host':     "http://127.0.0.1:8000",
-      'clientId': "2cbeeb023b62832a3bc2",
-      'redirectURI': "http://127.0.0.1:5000/oauth/",
-      'client_secret': 'a57da52eb21e22129d303932bdb5754c53b678c8',
-      'grant_type': "authorization_code",
-    }
+from private import settings
 
 
 @views.route('/oauth/', methods=['POST', 'GET'])

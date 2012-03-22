@@ -49,12 +49,12 @@
 
     var setting =
       {
-        'host':     "127.0.0.1:8000",
+        'host':     "{{ settings.host }}",
         'clientId': "{{ settings.clientId }}",
         'redirectURI': "{{ settings.redirectURI }}"
       };
 
-    var authHost     = "http://"     + setting.host;
+    var authHost     = "{{ settings.host }}";//"http://"     + setting.host;
     var resourceHost = "http://" + setting.host;
 
     var endUserAuthorizationEndpoint = authHost + "/oauth2/authorize";
